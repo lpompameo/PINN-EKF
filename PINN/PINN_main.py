@@ -1,5 +1,6 @@
 '''
 Initial file reading + execution of the PINN 
+@authors: Mariapia De Rosa, Laura Pompameo
 '''
 #%% Import the libraries
 import os

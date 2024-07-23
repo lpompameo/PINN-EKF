@@ -1,5 +1,6 @@
 '''
 EKF functions
+@authors: Mariapia De Rosa, Laura Pompameo
 '''
 #%% Import libraries
 import numpy as np

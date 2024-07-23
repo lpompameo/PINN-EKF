@@ -1,5 +1,6 @@
 '''
 GPS data visualization
+@authors: Mariapia De Rosa, Laura Pompameo
 '''
 #%% Import libraries
 import os
@@ -9,8 +10,8 @@ from pathlib import Path
 from scipy.signal import *
 import matplotlib.pyplot as plt
 try:
-    from src.EKF.EKF_functions import *
-    from src.EKF.preprocessing import * 
+    from EKF.EKF_functions import *
+    from EKF.preprocessing import * 
 except ModuleNotFoundError:
     from preprocessing import * 
     from EKF_functions import *

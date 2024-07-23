@@ -1,5 +1,6 @@
 '''
 Preprocessing functions for the entire project
+@authors: Mariapia De Rosa, Laura Pompameo
 '''
 #%% Import packages
 import numpy as np

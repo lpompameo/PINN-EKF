@@ -1,5 +1,6 @@
 '''
 Import of the PINN output and execution of the EKF
+@authors: Mariapia De Rosa, Laura Pompameo
 '''
 #%% Import libraries
 import os
