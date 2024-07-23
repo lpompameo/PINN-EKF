@@ -10,8 +10,8 @@ from pathlib import Path
 from scipy.signal import *
 import matplotlib.pyplot as plt
 try:
-    from EKF.EKF_functions import *
-    from EKF.preprocessing import * 
+    from EKF_functions import *
+    from preprocessing import * 
 except ModuleNotFoundError:
     from preprocessing import * 
     from EKF_functions import *

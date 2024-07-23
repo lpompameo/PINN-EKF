@@ -9,12 +9,8 @@ import pandas as pd
 from pathlib import Path
 from scipy.signal import *
 import matplotlib.pyplot as plt
-try:
-    from src.EKF.EKF_functions import *
-    from src.EKF.preprocessing import * 
-except ModuleNotFoundError:
-    from preprocessing import * 
-    from EKF_functions import *
+from EKF_functions import *
+from preprocessing import * 
 
 #%% Import classes
 fix = fixGPS_class()
