@@ -6,36 +6,25 @@ Import of the PINN output and execution of the EKF
 import os
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
+
 from pathlib import Path
 from scipy.signal import *
-import matplotlib.pyplot as plt
 from EKF_functions import *
-from preprocessing import * 
 
-#%% Import classes
-fix = fixGPS_class()
-
-#%% Global variables
-fsIMU = 25
-line = "Flegrea"
-linestr = "T1FLAV202"
-
-#%% Configuration path FLEGREA: Insert your data 
-dataPath = Path(os.getenv("path_flegrea") + "/Test" +\
-                            "/Kalman Filter" + "/dati grezzi") 
-
+#%% Geometry data
+# Path configuration
 geometry_data = pd.read_excel(
     Path(os.getenv(
         "path_flegrea") + "/Test" + "/Kalman Filter" +\
                 "/Tabulati Licola - Montesanto.xlsx"))
-
 geometry_data = geometry_data.loc[::-1].reset_index(drop=True)
 
-#%% Geometry data
+# Data collection
 longitude = np.array([float(i.replace("° E", "")) for i in geometry_data["Longitudine [°]"]])
 latitude = np.array([float(i.replace("° N", "")) for i in geometry_data["Latitudine [°]"]])
-curvature = geometry_data["Curvatura [1/km]"] * 1e-3                 # 1/m
-trasv_level = geometry_data["Liv.Trasv. [mm]"] * 1e-3        #m
+curvature = geometry_data["Curvatura [1/km]"] * 1e-3 #now in 1/m
+trasv_level = geometry_data["Liv.Trasv. [mm]"] * 1e-3 #now in m
 
 #%% Inizializzo variabili di stato e di misura
 var = variables()
@@ -46,7 +35,7 @@ ekf = EKF(stateVariables = ['px', 'py', 'pz', 'vx', 'vy', 'vz', 'ax', 'ay', 'az'
                             'vx_m', 'vy_m', 'vz_m',
                             'ax_m', 'ay_m', 'az_m', 
                             'phi_dot_m', 'theta_dot_m', 'psi_dot_m'], 
-        fs = fsIMU)
+        fs = 25)
 
 #%% Load data from IMU and from your PINN output
 ekf_inputs_df = pd.read_pickle(Path(os.getenv(

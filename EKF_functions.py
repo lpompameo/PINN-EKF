@@ -5,6 +5,7 @@ EKF functions
 #%% Import libraries
 import numpy as np
 from filterpy.common import Q_discrete_white_noise
+
 #%% Variables
 class variables:
     def __init__(self) -> None:
@@ -12,12 +13,8 @@ class variables:
     def create_dictionary_from_tuple(self, tup):
         # Ensure that the tuple contains at least one set of strings as its first element
         if not isinstance(tup, tuple) or len(tup) == 0 or not isinstance(tup[0], list) or not all(isinstance(s, str) for s in tup[0]):
-            raise ValueError("La tupla deve contenere un set di stringhe come primo elemento.")
-
-        # Create an empty dictionary
+            raise ValueError("The tuple need a set of strings as the first element")
         result_dict = {}
-
-        # Iterate over the list of strings and add each string as a key to the dictionary
         for index, name in enumerate(tup[0]):
             result_dict[name] = index
 
@@ -339,7 +336,7 @@ class EKF:
                             np.sin(curState[self.ff.x['phi']]) * np.cos(curState[self.ff.x['theta']]),
                             np.cos(curState[self.ff.x['phi']]) * np.cos(curState[self.ff.x['theta']])]]).reshape((3,3))
         
-        accel_rotated = np.dot(rotation_matrix.T, accel).T #1x3
+        accel_rotated = np.dot(rotation_matrix.T, accel).T 
 
         rotatedState[self.ff.x['ax']] = accel_rotated[:,0]
         rotatedState[self.ff.x['ay']] = accel_rotated[:,1]
